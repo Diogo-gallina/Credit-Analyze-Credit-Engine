@@ -1,5 +1,3 @@
-/* eslint-disable no-useless-escape */
-/* eslint-disable prettier/prettier */
 module.exports = {
   env: {
     es2022: true,
@@ -19,7 +17,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'import', 'eslint-plugin-import-helpers', 'prettier'],
+  plugins: ['@typescript-eslint', 'import', 'es// tenta resolver tipos além dos arquivoslint-plugin-import-helpers', 'prettier'],
   rules: {
     'no-use-before-define': 'off',
     'no-plusplus': 'off',
@@ -53,7 +51,7 @@ module.exports = {
       {
         newlinesBetween: 'always',
         groups: [
-          // Ordenar os novos módulos alfabeticamente, manter shared e models no topo e '../', './' e '..' no final
+          'module',
           '/^\.\.\//', // imports começando com '../'
           '/^\.\//', // imports começando com './'
           '/^\.\.$/', // imports que são exatamente '..'
@@ -67,7 +65,9 @@ module.exports = {
   },
   settings: {
     'import/resolver': {
-      typescript: {},
+      typescript: {
+        alwaysTryTypes: true,
+      },
     },
   },
 };
