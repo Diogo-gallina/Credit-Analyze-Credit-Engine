@@ -19,6 +19,7 @@
     "typescript": "^5.5.3"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest --runInBand --detectOpenHandles",
+    "test:watch": "jest --watch --passWithNoTests --runInBand --coverage=false"
   }
 }
