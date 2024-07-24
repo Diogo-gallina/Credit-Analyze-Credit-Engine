@@ -12,6 +12,13 @@
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true,
       "baseUrl": ".",
+      "paths": {
+        "@app/*": ["src/app/*"],
+        "@data/*": ["src/data/*"],
+        "@domain/*": ["src/domain/*"],
+        "@infra/*": ["src/infra/*"],
+        "@presentation/*": ["src/presentation/*"]
+      }
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules", "dist"]
