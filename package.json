@@ -1,7 +1,15 @@
 {
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node-dev -r tsconfig-paths/register src/app/server.ts",
+    "start": "node dist/app/server.js",
+    "test": "jest --runInBand --detectOpenHandles",
+    "test:watch": "jest --watch --passWithNoTests --runInBand --coverage=false"
+  },
   "devDependencies": {
     "@aws-sdk/client-sqs": "^3.616.0",
     "@types/aws-sdk": "^2.7.0",
+    "@types/express": "^4.17.21",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.14.10",
     "@types/prettier": "^3.0.0",
@@ -15,10 +23,6 @@
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.5.3"
-  },
-  "scripts": {
-    "test": "jest --runInBand --detectOpenHandles",
-    "test:watch": "jest --watch --passWithNoTests --runInBand --coverage=false"
   },
   "dependencies": {
     "express": "^4.19.2",
