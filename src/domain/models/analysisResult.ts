@@ -1,4 +1,4 @@
-export class AnalisisResultModel {
+export class AnalysisResultModel {
   id: string;
   userId: string;
   invoiceId: string;
