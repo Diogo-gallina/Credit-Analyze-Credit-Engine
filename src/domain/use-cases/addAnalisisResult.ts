@@ -1,11 +1,11 @@
-import { AnalisisResultModel } from "../models/analisesResult";
+import { AnalisisResultModel } from '../models/analisesResult';
 
 export class AddAnalisisResultModel {
-    userId: string;
-    invoiceId: string;
-    invoiveWasApproved: boolean;
+  userId: string;
+  invoiceId: string;
+  invoiveWasApproved: boolean;
 }
 
 export interface AddAnalisisResult {
-    add(analisisResult: AddAnalisisResultModel): Promise<AnalisisResultModel>;
+  add(analisisResult: AddAnalisisResultModel): Promise<AnalisisResultModel>;
 }
