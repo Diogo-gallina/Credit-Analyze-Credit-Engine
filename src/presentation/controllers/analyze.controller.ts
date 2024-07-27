@@ -1,5 +1,5 @@
-import { AnalysisResultUseCase } from '@app/use-cases/analisisResult/analysisResult';
-import { SendAnalysisResultToQueueUseCase } from '@app/use-cases/send-analysis-result-to-queue/SendAnalysisResultToQueue';
+import { AnalysisResultUseCase } from '@app/use-cases/analysisResult/analysisResult';
+import { SendAnalysisResultToQueueUseCase } from '@app/use-cases/send-analysis-result-to-queue/sendAnalysisResultToQueue';
 import { DbAddAnalysisResult } from '@data/use-cases/add-analisis-result/dbAddAnalysisResult';
 import { AddAnalysisResultModel } from '@domain/use-cases/addAnalysisResult';
 import { AnalyzeDataDto } from '@presentation/dtos/analyzeDataDto';
@@ -11,11 +11,7 @@ export class AnalyzeController implements Controller {
     private readonly analysisResultUseCase: AnalysisResultUseCase,
     private readonly dbAddAnalysisResult: DbAddAnalysisResult,
     private readonly sendAnalysisResultToQueueUseCase: SendAnalysisResultToQueueUseCase,
-  ) {
-    this.analysisResultUseCase = analysisResultUseCase;
-    this.dbAddAnalysisResult = dbAddAnalysisResult;
-    this.sendAnalysisResultToQueueUseCase = sendAnalysisResultToQueueUseCase;
-  }
+  ) {}
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
