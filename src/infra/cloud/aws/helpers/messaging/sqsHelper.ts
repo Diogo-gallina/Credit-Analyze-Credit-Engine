@@ -13,7 +13,6 @@ const client = new SQSClient(awsConfig);
 
 export const sqsHelper: IMessagingHelper = {
   async sendMessageToQueue<T>(message: T, queueName: string, messageGroupId: string): Promise<void> {
-    console.log('SEND MESSAGE AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: ', client.config.region);
     const queueUrl = `https://sqs.${awsConfig.region}.amazonaws.com/339712871292/${queueName}`;
     const params: SendMessageCommandInput = {
       QueueUrl: queueUrl,
@@ -44,8 +43,6 @@ export const sqsHelper: IMessagingHelper = {
     try {
       const receiveCommand = new ReceiveMessageCommand(params);
       const { Messages } = await client.send(receiveCommand);
-
-      console.log('MENSAGENS', { Messages });
       if (!Messages || Messages.length === 0) {
         console.log('No messages to process.');
         return [];
@@ -56,7 +53,6 @@ export const sqsHelper: IMessagingHelper = {
           QueueUrl: queueUrl,
           ReceiptHandle: message.ReceiptHandle!,
         };
-        console.log('INICIANDO DELEÇÃO DA MENSAGEM');
         const deleteCommand = new DeleteMessageCommand(deleteParams);
         client.send(deleteCommand);
         return parsedMessage;
