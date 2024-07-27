@@ -7,5 +7,5 @@ export class AddAnalysisResultModel {
 }
 
 export interface AddAnalysisResult {
-  add(analisisResult: AddAnalysisResultModel): Promise<AnalysisResultModel>;
+  add(analysisResult: AddAnalysisResultModel): Promise<AnalysisResultModel>;
 }
