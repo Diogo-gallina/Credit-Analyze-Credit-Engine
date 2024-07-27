@@ -11,11 +11,12 @@ dotenv.config();
 MongoHelper.connect(env.mongoUrl)
   .then(async () => {
     console.log(`Server running!!!`)
-    
+
     const messagingAdapter = new MessagingAdapter(sqsHelper);
     const consumesAnalyzeDataUseCase = new ConsumesAnalyzeDataUseCase(messagingAdapter);
 
-    schedule('*/5 * * * * *', async () => {
+    const cronJobLoopTimeExpression = '*/5 * * * * *';
+    schedule(cronJobLoopTimeExpression, async () => {
       await consumesAnalyzeDataUseCase.execute();
     });
   })
