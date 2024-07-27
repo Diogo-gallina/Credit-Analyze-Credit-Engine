@@ -3,8 +3,7 @@ import { SendAnalysisResultToQueueUseCase } from '@app/use-cases/send-analysis-r
 import { DbAddAnalysisResult } from '@data/use-cases/add-analisis-result/dbAddAnalysisResult';
 import { AddAnalysisResultModel } from '@domain/use-cases/addAnalysisResult';
 import { AnalyzeDataDto } from '@presentation/dtos/analyzeDataDto';
-import { badRequest, ok } from '@presentation/helper/httpHelper';
-import { Controller, HttpRequest, HttpResponse } from '@presentation/protocols';
+import { Controller, Request } from '@presentation/protocols';
 
 export class AnalyzeController implements Controller {
   constructor(
@@ -13,16 +12,15 @@ export class AnalyzeController implements Controller {
     private readonly sendAnalysisResultToQueueUseCase: SendAnalysisResultToQueueUseCase,
   ) {}
 
-  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle(request: Request): Promise<void> {
     try {
-      const analysisReultRequestBody: AnalyzeDataDto = httpRequest.body;
+      const analysisReultRequestBody: AnalyzeDataDto = request.body;
       const { invoice, user } = analysisReultRequestBody;
       const analysisResultData: AddAnalysisResultModel = await this.analysisResultUseCase.execute(invoice, user);
       const analysisResult = await this.dbAddAnalysisResult.add(analysisResultData);
       await this.sendAnalysisResultToQueueUseCase.execute(analysisResult);
-      return ok('Send result successfully');
     } catch (error) {
-      return badRequest(error);
+      console.error('Controller error: ' + error);
     }
   }
 }

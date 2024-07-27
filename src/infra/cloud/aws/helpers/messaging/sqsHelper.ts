@@ -32,6 +32,7 @@ export const sqsHelper: IMessagingHelper = {
   },
 
   async consumesMessage<T>(queueName: string): Promise<T[]> {
+    console.log({ awsConfig });
     const queueUrl = `https://sqs.${awsConfig.region}.amazonaws.com/339712871292/${queueName}`;
     const params = {
       QueueUrl: queueUrl,

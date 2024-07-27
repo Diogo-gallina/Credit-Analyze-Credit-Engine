@@ -10,9 +10,8 @@ dotenv.config();
 
 MongoHelper.connect(env.mongoUrl)
   .then(async () => {
-    const app = (await import('./config/app')).default;
-    app.listen(env.port, () => console.log(`Server running at http://localhost:${env.port}`));
-
+    console.log(`Server running!!!`)
+    
     const messagingAdapter = new MessagingAdapter(sqsHelper);
     const consumesAnalyzeDataUseCase = new ConsumesAnalyzeDataUseCase(messagingAdapter);
 
