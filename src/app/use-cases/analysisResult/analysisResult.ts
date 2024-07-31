@@ -15,6 +15,7 @@ export class AnalysisResultUseCase {
       invoiceId: invoice.id,
       userId: user.id,
       invoiveWasApproved: analysisResultStatus,
+      createdAt: new Date(),
     };
 
     return analysisResult;

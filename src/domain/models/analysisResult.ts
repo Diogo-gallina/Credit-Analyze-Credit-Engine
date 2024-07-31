@@ -3,4 +3,5 @@ export class AnalysisResultModel {
   userId: string;
   invoiceId: string;
   invoiveWasApproved: boolean;
+  createdAt: Date;
 }
