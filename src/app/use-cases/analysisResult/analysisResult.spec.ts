@@ -53,4 +53,18 @@ describe('Analysis Result Use Case', () => {
 
     expect(analysisResult.invoiveWasApproved).toBe(false);
   });
+
+  it('should return analysisResult if AnalysisResultUseCase called with correct params', async () => {
+    const { sut } = makeSut();
+    const invoice = makeFakeInvoice();
+    const user = makeFakeUser();
+    const analysisResult = await sut.execute(invoice, user);
+
+    expect(analysisResult).toEqual({
+      invoiceId: invoice.id,
+      userId: user.id,
+      invoiveWasApproved: expect.any(Boolean),
+      createdAt: expect.any(Date),
+    });
+  });
 });
