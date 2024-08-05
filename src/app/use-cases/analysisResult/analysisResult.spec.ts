@@ -34,8 +34,23 @@ const makeSut = (): SutTypes => {
 describe('Analysis Result Use Case', () => {
   it('should insert random boolean in invoiveWasApproved', async () => {
     const { sut } = makeSut();
-    const analysisResult = await sut.execute(makeFakeInvoice(), makeFakeUser())
+    const analysisResult = await sut.execute(makeFakeInvoice(), makeFakeUser());
 
     expect(typeof analysisResult.invoiveWasApproved).toBe('boolean');
+  });
+
+  it('should insert false in invoiveWasApproved if invoice doccument is not equal user document', async () => {
+    const { sut } = makeSut();
+    const invoiceWithWrongDocument = {
+        id: 'anyId',
+        userId: 'anyUserId',
+        issuerName: 'anyIssuerName',
+        document: 'wrongDocument',
+        paymentDate: new Date(),
+        paymentAmount: 100,
+    };
+    const analysisResult = await sut.execute(invoiceWithWrongDocument, makeFakeUser());
+
+    expect(analysisResult.invoiveWasApproved).toBe(false);
   });
 });
