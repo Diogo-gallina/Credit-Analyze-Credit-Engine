@@ -45,6 +45,16 @@ describe.only('Db Add Analysis Result Use Case', () => {
     jest.clearAllMocks();
   });
 
+  it('should call addAnalysisResultRepository with correct values', async () => {
+    const { sut, addAnalysisResultRepository } = makeSut();
+    const addAnalysisResultRepositorySpy = jest.spyOn(addAnalysisResultRepository, 'add')
+
+    await sut.add(makeFakeAnalysisResultData());
+
+    expect(addAnalysisResultRepositorySpy).toHaveBeenCalledTimes(1)
+    expect(addAnalysisResultRepositorySpy).toHaveBeenCalledWith(makeFakeAnalysisResultData())
+  });
+
   it('should return analysis result on success case', async () => {
     const { sut } = makeSut();
     const analysisResultData = makeFakeAnalysisResultData();
