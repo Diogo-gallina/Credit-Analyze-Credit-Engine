@@ -4,12 +4,11 @@ import { AddAnalysisResultModel } from '@domain/use-cases/addAnalysisResult';
 import { AnalysisResultModel } from '@domain/models/analysisResult';
 
 const makeFakeAnalysisResultData = (): AddAnalysisResultModel => ({
-    userId: 'anyUserId',
-    invoiceId: 'anyInvoiceId',
-    invoiveWasApproved: true,
-    createdAt: new Date(),
-  });
-  
+  userId: 'anyUserId',
+  invoiceId: 'anyInvoiceId',
+  invoiveWasApproved: true,
+  createdAt: new Date(),
+});
 
 const makeFakeAnalysisResult = (): AnalysisResultModel => ({
   id: 'anyId',
@@ -40,19 +39,26 @@ const makeSut = (): SutTypes => {
   return { sut, addAnalysisResultRepository };
 };
 
-describe.only('Db Add Analysis Result Use Case', () => {
+describe('Db Add Analysis Result Use Case', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it('should call addAnalysisResultRepository with correct values', async () => {
     const { sut, addAnalysisResultRepository } = makeSut();
-    const addAnalysisResultRepositorySpy = jest.spyOn(addAnalysisResultRepository, 'add')
-
+    const addAnalysisResultRepositorySpy = jest.spyOn(addAnalysisResultRepository, 'add');
     await sut.add(makeFakeAnalysisResultData());
 
-    expect(addAnalysisResultRepositorySpy).toHaveBeenCalledTimes(1)
-    expect(addAnalysisResultRepositorySpy).toHaveBeenCalledWith(makeFakeAnalysisResultData())
+    expect(addAnalysisResultRepositorySpy).toHaveBeenCalledTimes(1);
+    expect(addAnalysisResultRepositorySpy).toHaveBeenCalledWith(makeFakeAnalysisResultData());
+  });
+
+  it('should throw if addAnalysisResultRepository throws', async () => {
+    const { sut, addAnalysisResultRepository } = makeSut();
+    jest.spyOn(addAnalysisResultRepository, 'add').mockReturnValueOnce(Promise.reject(new Error()));
+    const promise = await sut.add(makeFakeAnalysisResultData());
+
+    expect(promise).rejects.toThrow(new Error());
   });
 
   it('should return analysis result on success case', async () => {
@@ -60,6 +66,6 @@ describe.only('Db Add Analysis Result Use Case', () => {
     const analysisResultData = makeFakeAnalysisResultData();
     const analysisResult = await sut.add(analysisResultData);
 
-    expect(analysisResult).toEqual(makeFakeAnalysisResult())
+    expect(analysisResult).toEqual(makeFakeAnalysisResult());
   });
 });
