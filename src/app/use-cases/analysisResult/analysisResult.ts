@@ -9,8 +9,6 @@ export class AnalysisResultUseCase {
     const randomBooleanResult = Math.random() < 0.5;
     analysisResultStatus = randomBooleanResult;
 
-    if (invoice.document !== user.document) analysisResultStatus = false;
-
     const analysisResult: AddAnalysisResultModel = {
       invoiceId: invoice.id,
       userId: user.id,

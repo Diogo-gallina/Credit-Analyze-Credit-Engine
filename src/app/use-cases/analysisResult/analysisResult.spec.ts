@@ -39,21 +39,6 @@ describe('Analysis Result Use Case', () => {
     expect(typeof analysisResult.invoiveWasApproved).toBe('boolean');
   });
 
-  it('should insert false in invoiveWasApproved if invoice doccument is not equal user document', async () => {
-    const { sut } = makeSut();
-    const invoiceWithWrongDocument = {
-        id: 'anyId',
-        userId: 'anyUserId',
-        issuerName: 'anyIssuerName',
-        document: 'wrongDocument',
-        paymentDate: new Date(),
-        paymentAmount: 100,
-    };
-    const analysisResult = await sut.execute(invoiceWithWrongDocument, makeFakeUser());
-
-    expect(analysisResult.invoiveWasApproved).toBe(false);
-  });
-
   it('should return analysisResult if AnalysisResultUseCase called with correct params', async () => {
     const { sut } = makeSut();
     const invoice = makeFakeInvoice();
