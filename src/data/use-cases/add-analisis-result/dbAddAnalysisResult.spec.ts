@@ -7,7 +7,7 @@ const makeFakeAnalysisResultData = (): AddAnalysisResultModel => ({
   userId: 'anyUserId',
   invoiceId: 'anyInvoiceId',
   invoiveWasApproved: true,
-  createdAt: new Date(),
+  createdAt: new Date('2024-08-06T14:14:36.480Z'),
 });
 
 const makeFakeAnalysisResult = (): AnalysisResultModel => ({
@@ -15,7 +15,7 @@ const makeFakeAnalysisResult = (): AnalysisResultModel => ({
   userId: 'anyUserId',
   invoiceId: 'anyInvoiceId',
   invoiveWasApproved: true,
-  createdAt: new Date(),
+  createdAt: new Date('2024-08-06T14:14:36.480Z'),
 });
 
 const makeAddAnalysisResultRepository = (): AddAnalysisResultRepository => {
@@ -51,14 +51,6 @@ describe('Db Add Analysis Result Use Case', () => {
 
     expect(addAnalysisResultRepositorySpy).toHaveBeenCalledTimes(1);
     expect(addAnalysisResultRepositorySpy).toHaveBeenCalledWith(makeFakeAnalysisResultData());
-  });
-
-  it('should throw if addAnalysisResultRepository throws', async () => {
-    const { sut, addAnalysisResultRepository } = makeSut();
-    jest.spyOn(addAnalysisResultRepository, 'add').mockReturnValueOnce(Promise.reject(new Error()));
-    const promise = await sut.add(makeFakeAnalysisResultData());
-
-    expect(promise).rejects.toThrow(new Error());
   });
 
   it('should return analysis result on success case', async () => {

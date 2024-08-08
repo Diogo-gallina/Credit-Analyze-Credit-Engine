@@ -34,6 +34,6 @@ describe('Analysis Result Mongo Repository', () => {
     expect(analysisResult.userId).toBe('anyUserId');
     expect(analysisResult.invoiceId).toBe('anyInvoiceId');
     expect(analysisResult.invoiveWasApproved).toBe(true);
-    expect(analysisResult.createdAt).toBeInstanceOf(new Date('2024-08-06T14:14:36.480Z'));
+    expect(analysisResult.createdAt).toEqual(new Date('2024-08-06T14:14:36.480Z'));
   });
 });
