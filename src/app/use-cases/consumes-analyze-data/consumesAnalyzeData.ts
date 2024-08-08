@@ -8,7 +8,6 @@ export class ConsumesAnalyzeDataUseCase {
 
   async execute() {
     const analyzeDataMessages = await this.messagingAdapter.consumesInvoiceData(CONSUME_QUEUE_NAME);
-
     for (const analyzeData of analyzeDataMessages) {
       try {
         const analyzeController = makeAnalyzeController();
