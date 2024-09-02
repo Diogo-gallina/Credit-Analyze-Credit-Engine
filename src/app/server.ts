@@ -10,7 +10,7 @@ dotenv.config();
 
 MongoHelper.connect(env.mongoUrl)
   .then(async () => {
-    console.log(`Server running!!!`)
+    console.log(`Server running!!!`);
 
     const messagingAdapter = new MessagingAdapter(sqsHelper);
     const consumesAnalyzeDataUseCase = new ConsumesAnalyzeDataUseCase(messagingAdapter);
